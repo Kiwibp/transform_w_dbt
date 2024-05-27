@@ -1,9 +1,9 @@
 SELECT 
     customers.customer_key, 
-    customers.name, 
-    SUM(line_items.extended_price * (1 - line_items.discount_amount_usd)) AS revenue, 
+    customers.customer_name, 
+    SUM(line_items.extended_price_usd * (1 - line_items.discount_amount_usd)) AS revenue, 
     customers.account_balance, 
-    nations.name, 
+    nations.nation_name, 
     customers.address, 
     customers.phone
 FROM {{ ref('stg_tpch__customers')}} customers 
@@ -14,14 +14,12 @@ LEFT JOIN {{ ref('stg_tpch__line_items')}} line_items
 LEFT JOIN {{ ref('stg_tpch__nations') }} nations 
     ON customers.nation_key = nations.nation_key 
 WHERE orders.order_date < CURRENT_DATE
-    AND orders.order_date >= CURRENT_DATE - interval '3' month
+    AND orders.order_date >= DATEADD(month, -3, CURRENT_DATE)
     AND line_items.return_flag_code = 'R'
 GROUP BY
     customers.customer_key,
-    customers.name, 
+    customers.customer_name, 
     customers.account_balance, 
-    nations.name, 
+    nations.nation_name, 
     customers.address, 
     customers.phone
-
-

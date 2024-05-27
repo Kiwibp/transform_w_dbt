@@ -40,3 +40,17 @@ models:
       - name: n_name 
       - name: c_address 
       - name: c_phone
+
+  - name: mart_model_1
+    description: "This is the first mart model."
+    data_tests:
+      - never_more_records:
+          mart_model: 'returned_item_customers'
+          staging_model: 'stg_tpch_customers'
+
+  - name: mart_model_2
+    description: "This is the second mart model."
+    data_tests:
+      - never_more_records:
+          mart_model: 'returned_item_customers'
+          staging_model: 'stg_tpch_nations'

@@ -2,7 +2,7 @@
 SELECT 
     ROW_NUMBER() OVER (ORDER BY c_custkey) AS object_id,
     c_custkey AS customer_key,
-    c_name AS name,
+    c_name AS customer_name,
     c_address AS address,
     c_nationkey AS nation_key,
     c_phone AS phone,

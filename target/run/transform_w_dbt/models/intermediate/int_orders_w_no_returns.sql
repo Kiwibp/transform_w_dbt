@@ -1,0 +1,21 @@
+
+  create or replace   view dev.intermediate.int_orders_w_no_returns
+  
+   as (
+    WITH 
+orders_returns_removed AS (
+    SELECT 
+        order_key
+    FROM dev.staging.stg_tpch__orders orders
+    -- only select orders that don't have items that have been returned
+    WHERE NOT EXISTS (
+        SELECT 
+            1
+        FROM dev.staging.stg_tpch__line_items line_items 
+        WHERE orders.order_key = line_items.order_key
+            AND return_flag_code = 'R'
+    )
+)
+SELECT * FROM orders_returns_removed
+  );
+
