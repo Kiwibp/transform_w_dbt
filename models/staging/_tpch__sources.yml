@@ -76,3 +76,10 @@ sources:
           - name: o_shippriority 
 
       - name: nation
+        description: Includes details of those nations from customer orders 
+        columns: 
+          - name: n_nationkey
+            description: '{{ doc("nation_key") }}'
+            tests: 
+              - unique 
+              - not_null

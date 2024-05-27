@@ -7,3 +7,7 @@ Unique ID of an order.
 {% docs customer_key %}
 Unique ID of a customer.
 {% enddocs %}
+
+{% docs nation_key %}
+Unique ID of a nation.
+{% enddocs %}
